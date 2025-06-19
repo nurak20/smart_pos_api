@@ -26,7 +26,7 @@ export class CategoriesController {
         @Body() dto: CreateCategoryDto,
     ): Promise<ApiResponse<Category>> {
         const data = await this.service.create(dto);
-        return new ApiResponse(true, data, 'Category created successfully');
+        return new ApiResponse(true, data, 'Category created successfully ');
     }
 
     @Get()
