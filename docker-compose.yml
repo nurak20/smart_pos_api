@@ -1,36 +1,32 @@
 version: '3.8'
 
 services:
-  # NestJS Application
   app:
     build: .
-    ports:
-      - "3200:3000"
+    env_file: .env
     environment:
-      - NODE_ENV=production
-      - DB_HOST=62.146.237.218
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASS=1p2m3g4
-      - DB_NAME=postgres
-      - TELEGRAM_BOT_TOKEN=8198737161:AAEOOeZKMKIT41FrEUXqnRguheXQaUtE8NM
-      - JWT_SECRET = aksndk*&@iahodihoia938790iahoihou39024
-      # Alternative DATABASE_URL format if your app uses it
-      - DATABASE_URL=postgresql://dev:Dev@1234@db:5432/smart_pos
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+    ports:
+      - "3000:3000"
     depends_on:
       - db
 
-  # PostgreSQL Database
   db:
-    image: postgres:15-alpine
+    image: postgres:13
+    env_file: .env
     environment:
-      - POSTGRES_USER=dev
-      - POSTGRES_PASSWORD=Dev@1234
-      - POSTGRES_DB=smart_pos
-    ports:
-      - "5433:5432" # External port 5433 maps to internal 5432
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 volumes:
-  db_data:
+  postgres_data:
