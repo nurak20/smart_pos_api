@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # NestJS Application
+  app:
+    build: .
+    ports:
+      - "3200:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=dev
+      - DB_PASS=Dev@1234
+      - DB_NAME=smart_pos
+      - TELEGRAM_BOT_TOKEN=8198737161:AAEOOeZKMKIT41FrEUXqnRguheXQaUtE8NM
+      - JWT_SECRET = aksndk*&@iahodihoia938790iahoihou39024
+      # Alternative DATABASE_URL format if your app uses it
+      - DATABASE_URL=postgresql://dev:Dev@1234@db:5432/smart_pos
+    depends_on:
+      - db
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=Dev@1234
+      - POSTGRES_DB=smart_pos
+    ports:
+      - "5433:5432" # External port 5433 maps to internal 5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
