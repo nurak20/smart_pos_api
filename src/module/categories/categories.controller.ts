@@ -16,7 +16,7 @@ import { ApiResponse } from 'src/extension/api_respone';
 import { UpdateCategoryDto } from './dto/update-category.dto/update-category.dto';
 
 
-@Controller('categories')
+@Controller('v1/categories')
 export class CategoriesController {
     constructor(private readonly service: CategoriesService) { }
 
