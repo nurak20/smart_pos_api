@@ -24,7 +24,7 @@ export class CategoriesService {
 
     async findOne(id: string): Promise<Category> {
         const entity = await this.repo.findOneBy({ id });
-        if (!entity) throw new NotFoundException(`Category ${id} not found`);
+        if (!entity) throw new NotFoundException(`Category ${id} not found `);
         return entity;
     }
 
