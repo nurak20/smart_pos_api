@@ -13,7 +13,6 @@ services:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     ports:
       - "3000:3000"
-    depends_on:
-      - db
+
 volumes:
   postgres_data:
