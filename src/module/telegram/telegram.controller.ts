@@ -160,7 +160,7 @@ export class TelegramController {
 
             return {
                 success: true,
-                message: 'Polling started successfully'
+                message: 'Polling started successfully '
             };
         } catch (error) {
             this.logger.error('Failed to start polling:', error);
