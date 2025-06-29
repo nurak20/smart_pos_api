@@ -25,7 +25,6 @@ export class ProductsService {
 
     async create(dto: CreateProductDto): Promise<Product> {
         const product = this.repo.create(dto);
-        console.log(CreateProductDto);
         return this.repo.save(product);
     }
 

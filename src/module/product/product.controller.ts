@@ -46,8 +46,6 @@ export class ProductsController {
 
         // ← await here!
         const data = await this.service.addToCart(product_id, quantity);
-
-        console.log(data);
         return new ApiResponse(true, data, 'Product added successfully');
     }
 

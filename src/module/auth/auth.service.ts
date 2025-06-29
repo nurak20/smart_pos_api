@@ -16,11 +16,11 @@ export class AuthService {
      * Validate credentials and return the full user (without password) 
      */
     private async validateCredentials(usernameOrEmail: string, pass: string) {
-        console.log(usernameOrEmail, pass);
+
         const user = await this.userService.findByUsernameOrEmail(usernameOrEmail);
         if (user && (await this.userService.verifyPassword(user, pass))) {
             const { password, ...rest } = user;
-            console.log(rest);
+
             return rest;
         }
         return null;
@@ -38,7 +38,6 @@ export class AuthService {
         if (!user) {
             throw new UnauthorizedException('Invalid credentials');
         }
-        console.log(LoginDto);
 
         // Extract roles and permissions
         const roles = user.roles.map(r => r.name);
@@ -52,14 +51,7 @@ export class AuthService {
         // Construct response
         return {
             data: {
-                user: {
-                    id: user.user_id,
-                    username: user.username,
-                    email: user.email,
-                    status: user.status,
-                    createdAt: user.created_date,
-                    updatedAt: user.updated_date,
-                },
+                user: user,
                 authorization: {
                     roles: user.roles.map(r => r.name),
                     permissions,

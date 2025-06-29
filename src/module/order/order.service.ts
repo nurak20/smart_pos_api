@@ -25,6 +25,19 @@ export class OrderService {
     findAll(): Promise<Order[]> {
         return this.repo.find();
     }
+    async getOrderDetailsById(orderId: string): Promise<any> {
+        // First get the order
+        const order = await this.findOne(orderId);
+
+        // Then get all order details associated with this order
+        const orderDetails = await this.orderDetailService.findByOrderId(orderId);
+
+
+        return {
+            order_info: order,
+            order_details: orderDetails
+        };
+    }
 
     async findOne(id: string): Promise<Order> {
         const entity = await this.repo.findOneBy({ order_id: id });

@@ -42,6 +42,13 @@ export class OrderController {
             'Order and invoice created successfully'
         );
     }
+    @Get('details/:id')
+    async getOrderDetails(
+        @Param('id') id: string,
+    ): Promise<ApiResponse<any>> {
+        const data = await this.service.getOrderDetailsById(id);
+        return new ApiResponse(true, data, 'Order details retrieved successfully');
+    }
 
     @Get()
     async findAll(): Promise<ApiResponse<Order[]>> {

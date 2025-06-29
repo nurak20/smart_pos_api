@@ -21,6 +21,10 @@ export class OrderDetailService {
     findAll(): Promise<OrderDetail[]> {
         return this.repo.find();
     }
+    async findByOrderId(orderId: string): Promise<OrderDetail[]> {
+        const details = await this.repo.find({ where: { order_id: orderId } });
+        return details;
+    }
 
     async findOne(id: string): Promise<OrderDetail> {
         const entity = await this.repo.findOneBy({ od_id: id });
