@@ -82,7 +82,7 @@ export class TelegramController {
     @HttpCode(HttpStatus.OK)
     async handleWebhook(@Body() update: TelegramUpdate): Promise<{ status: string }> {
         try {
-            this.logger.log('Received webhook update: ', JSON.stringify(update, null, 2));
+            this.logger.log('Received webhook update:  ', JSON.stringify(update, null, 2));
 
             await this.telegramService.handleWebhookUpdate(update);
 
